@@ -5,14 +5,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 
 class NotesViewModel(application: Application) : AndroidViewModel(application) {
-    var noteRepository:NoteRepository = NoteRepository(application)
+    private var noteRepository:NoteRepository = NoteRepository(application)
     var allNotes: LiveData<List<Note>> = noteRepository.allNotes
 
     fun insert(note:Note) {
         noteRepository.insert(note)
     }
 
-    fun uodate(note:Note) {
+    fun update(note:Note) {
         noteRepository.update(note)
     }
 

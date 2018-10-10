@@ -1,4 +1,4 @@
-package wards.jungle.archcomps
+package wards.jungle.archcomps.Dao
 
 import androidx.room.*
 
