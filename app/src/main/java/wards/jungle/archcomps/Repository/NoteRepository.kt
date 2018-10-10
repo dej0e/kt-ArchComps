@@ -1,39 +1,41 @@
-package wards.jungle.archcomps
+package wards.jungle.archcomps.Repository
 
 import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import wards.jungle.archcomps.Dao.NotesDao
+import wards.jungle.archcomps.Database.NotesDatabase
+import wards.jungle.archcomps.Model.Note
 
 class NoteRepository(application: Application) {
     private var noteDao: NotesDao
     var allNotes: LiveData<List<Note>>
 
     init {
-        val notesDb:NotesDatabase? = NotesDatabase.getInstance(application)
+        val notesDb: NotesDatabase? = NotesDatabase.getInstance(application)
         this.noteDao = notesDb!!.notesDao()
         this.allNotes = noteDao.getAllNotes()
     }
 
-    fun insert(note:Note) {
-        DoAsyncWithArgs<NotesDao,Note>(noteDao) {
-            dao, item -> dao.insert(item)
+    fun insert(note: Note) {
+        DoAsyncWithArgs<NotesDao, Note>(noteDao) { dao, item ->
+            dao.insert(item)
         }.execute(note)
     }
 
-    fun update(note:Note) {
-        DoAsyncWithArgs<NotesDao,Note>(noteDao) {
-            dao, item -> dao.update(item)
+    fun update(note: Note) {
+        DoAsyncWithArgs<NotesDao, Note>(noteDao) { dao, item ->
+            dao.update(item)
         }.execute(note)    }
 
-    fun delete(note:Note) {
-        DoAsyncWithArgs<NotesDao,Note>(noteDao) {
-            dao, item -> dao.delete(item)
+    fun delete(note: Note) {
+        DoAsyncWithArgs<NotesDao, Note>(noteDao) { dao, item ->
+            dao.delete(item)
         }.execute(note)    }
 
     fun deleteAllNotes() {
-        DoAsync(noteDao) {
-            dao -> dao.deleteAllNotes()
+        DoAsync(noteDao) { dao ->
+            dao.deleteAllNotes()
         }.execute()
     }
 }

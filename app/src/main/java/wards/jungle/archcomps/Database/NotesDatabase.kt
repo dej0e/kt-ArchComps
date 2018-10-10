@@ -1,4 +1,4 @@
-package wards.jungle.archcomps
+package wards.jungle.archcomps.Database
 
 import android.content.Context
 import android.util.Log
@@ -7,6 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import wards.jungle.archcomps.Dao.NotesDao
+import wards.jungle.archcomps.Model.Note
 
 @Database(entities = [Note::class],
         version = 1,
@@ -24,7 +25,7 @@ abstract class NotesDatabase: RoomDatabase() {
             }
         }
         fun getInstance(context: Context): NotesDatabase? {
-            if(instance==null){
+            if(instance ==null){
                 synchronized(NotesDatabase::class) {
                     instance = Room.databaseBuilder(context.applicationContext, NotesDatabase::class.java, "notes.db")
                             .fallbackToDestructiveMigration()

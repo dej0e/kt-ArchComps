@@ -1,4 +1,4 @@
-package wards.jungle.archcomps
+package wards.jungle.archcomps.Model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

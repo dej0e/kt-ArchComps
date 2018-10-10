@@ -2,7 +2,7 @@ package wards.jungle.archcomps.Dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import wards.jungle.archcomps.Note
+import wards.jungle.archcomps.Model.Note
 
 @Dao
 abstract class NotesDao: BaseDao<Note>() {

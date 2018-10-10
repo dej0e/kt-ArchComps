@@ -1,4 +1,4 @@
-package wards.jungle.archcomps
+package wards.jungle.archcomps.Activity
 
 import android.os.Bundle
 import android.util.Log
@@ -6,6 +6,9 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import wards.jungle.archcomps.Model.Note
+import wards.jungle.archcomps.ViewModel.MainActivity.NotesViewModel
+import wards.jungle.archcomps.R
 
 class MainActivity : AppCompatActivity() {
     companion object {
