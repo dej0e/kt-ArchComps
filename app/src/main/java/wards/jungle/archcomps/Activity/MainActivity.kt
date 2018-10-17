@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         initializeButton = findViewById(R.id.helloworld_button)
         initializeButton.setOnClickListener {
+
             for (i in 0..10) {
                 notesViewModel.insert(Note(title = "Testing $i", description = "Description $i", priority = i))
 
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         val nameObserver = Observer<List<Note>> { notes ->
             notes.forEach {
                 val id = it.id
-                Log.d(TAG, " $id | " + it.title + " | " +  it.description + " | " + it.priority) }
+                Log.d(TAG, " $id | " + it.title + " | " +  it.description + " | " + it.priority)
+            }
         }
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
