@@ -6,28 +6,28 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import wards.jungle.archcomps.Dao.NotesDao
-import wards.jungle.archcomps.Model.Note
+import wards.jungle.archcomps.Dao.UserDao
+import wards.jungle.archcomps.Model.User
 
-@Database(entities = [Note::class],
+@Database(entities = [User::class],
         version = 1,
         exportSchema = true)
-abstract class NotesDatabase: RoomDatabase() {
-    abstract fun notesDao(): NotesDao
+abstract class ArchCompsDatabase: RoomDatabase() {
+    abstract fun notesDao(): UserDao
 
     companion object {
-        val TAG = NotesDatabase::class.simpleName
-        private var instance: NotesDatabase? = null
+        val TAG = ArchCompsDatabase::class.simpleName
+        private var instance: ArchCompsDatabase? = null
         private object Callback: RoomDatabase.Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 Log.d(TAG, "Instance Created")
                 super.onCreate(db)
             }
         }
-        fun getInstance(context: Context): NotesDatabase? {
+        fun getInstance(context: Context): ArchCompsDatabase? {
             if(instance ==null){
-                synchronized(NotesDatabase::class) {
-                    instance = Room.databaseBuilder(context.applicationContext, NotesDatabase::class.java, "notes.db")
+                synchronized(ArchCompsDatabase::class) {
+                    instance = Room.databaseBuilder(context.applicationContext, ArchCompsDatabase::class.java, "notes.db")
                             .fallbackToDestructiveMigration()
                             .addCallback(Callback)
                             .build()

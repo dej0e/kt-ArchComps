@@ -1,44 +1,41 @@
 package wards.jungle.archcomps.Activity
 
+import android.content.Intent
+import android.net.Network
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import wards.jungle.archcomps.Model.Note
-import wards.jungle.archcomps.ViewModel.MainActivity.NotesViewModel
+import intent
+import kotlinx.android.synthetic.main.activity_main.*
+import wards.jungle.archcomps.Extensions.afterTextChanged
+import wards.jungle.archcomps.ViewModel.MainActivity.UserViewModel
 import wards.jungle.archcomps.R
 
 class MainActivity : AppCompatActivity() {
     companion object {
         val TAG = MainActivity::class.simpleName
     }
-    private lateinit var initializeButton: Button
-    private lateinit var notesViewModel: NotesViewModel
+    private lateinit var submitBtn: Button
+    private lateinit var emailEt: EditText
+    private lateinit var userViewModel: UserViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        notesViewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
-
-        initializeButton = findViewById(R.id.helloworld_button)
-        initializeButton.setOnClickListener {
-
-            for (i in 0..10) {
-                notesViewModel.insert(Note(title = "Testing $i", description = "Description $i", priority = i))
-
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+        emailEt = email_et
+        submitBtn = submit_btn
+        emailEt.afterTextChanged {
+            if(userViewModel.validateEmail(it)) {
+                emailEt.error = null
+            } else {
+                emailEt.error = "Enter valid email address"
             }
         }
-
-        val nameObserver = Observer<List<Note>> { notes ->
-            notes.forEach {
-                val id = it.id
-                Log.d(TAG, " $id | " + it.title + " | " +  it.description + " | " + it.priority)
-            }
-        }
-
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        notesViewModel.allNotes.observe(this, nameObserver)
-
     }
 }
+
+fun <T : Any> T.TAG() = this::class.simpleName
