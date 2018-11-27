@@ -2,6 +2,7 @@ package wards.jungle.archcomps
 
 import androidx.lifecycle.ViewModelProviders
 import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertTrue
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -38,15 +39,22 @@ class UserViewModelTest {
     }
 
     @Test
-    fun `testing if email validation works`() {
+    fun testingIfEmailIdIsValid() {
         val mockedEmailId = "test@test.com"
-        assertEquals(userViewModel.validateEmail(mockedEmailId), true)
+        assertTrue(userViewModel.validateEmail(mockedEmailId))
     }
 
     @Test
-    fun `testing if validation do not work`() {
+    fun testingIfEmailIdIsValidIfPatternMatchFails() {
         val mockedEmailId = "test-test.com"
-        assertEquals(userViewModel.validateEmail(mockedEmailId), false)
+        assertTrue(!userViewModel.validateEmail(mockedEmailId))
+
+    }
+
+    @Test
+    fun testingIfEmailIdIsValidIfEmptyStringIsPassed() {
+        val mockedEmailId = ""
+        assertTrue(!userViewModel.validateEmail(mockedEmailId))
     }
 
     @After
