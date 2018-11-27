@@ -19,9 +19,13 @@ platform :android do
   desc "Builds, runs lint, and runs all the tests"
   lane :build do
     gradle(task: "clean lint")
-    gradle(task: "test")
+    test
     gradle(task: "assemble")
+  end
 
+desc "Runs all the tests with JacocoTestReport"
+  lane :test do
+    gradle(task: "testDebugUnitTest jacocoTestReport")
   end
 
   desc "Submit a new Beta Build to Crashlytics Beta"
