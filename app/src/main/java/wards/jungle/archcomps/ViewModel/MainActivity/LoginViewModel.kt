@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import wards.jungle.archcomps.Model.User
 import wards.jungle.archcomps.Repository.LoginRepository
 
-class UserViewModel(application: Application) : AndroidViewModel(application) {
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private var loginRepository: LoginRepository = LoginRepository(application)
     var allUsers: LiveData<List<User>> = loginRepository.allUsers
     var name: MutableLiveData<String> = MutableLiveData<String>()

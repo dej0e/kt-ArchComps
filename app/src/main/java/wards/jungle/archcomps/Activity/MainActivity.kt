@@ -1,35 +1,28 @@
 package wards.jungle.archcomps.Activity
 
-import android.content.Intent
-import android.net.Network
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import intent
 import kotlinx.android.synthetic.main.activity_main.*
 import wards.jungle.archcomps.Extensions.afterTextChanged
-import wards.jungle.archcomps.ViewModel.MainActivity.UserViewModel
+import wards.jungle.archcomps.ViewModel.MainActivity.LoginViewModel
 import wards.jungle.archcomps.R
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        val TAG = MainActivity::class.simpleName
-    }
+
     private lateinit var submitBtn: Button
     private lateinit var emailEt: EditText
-    private lateinit var userViewModel: UserViewModel
+    private lateinit var loginViewModel: LoginViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         emailEt = email_et
         submitBtn = submit_btn
         emailEt.afterTextChanged {
-            if(userViewModel.validateEmail(it)) {
+            if(loginViewModel.validateEmail(it)) {
                 emailEt.error = null
             } else {
                 emailEt.error = "Enter valid email address"
@@ -38,4 +31,4 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-fun <T : Any> T.TAG() = this::class.simpleName
+fun <T : Any> T.tag() = this::class.simpleName

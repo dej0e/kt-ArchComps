@@ -1,7 +1,6 @@
 package wards.jungle.archcomps
 
 import androidx.lifecycle.ViewModelProviders
-import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
 import org.junit.After
 import org.junit.Before
@@ -11,7 +10,7 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import wards.jungle.archcomps.Activity.MainActivity
-import wards.jungle.archcomps.ViewModel.MainActivity.UserViewModel
+import wards.jungle.archcomps.ViewModel.MainActivity.LoginViewModel
 import java.lang.Exception
 
 
@@ -22,10 +21,10 @@ import java.lang.Exception
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(application = ArchApp::class)
-class UserViewModelTest {
+class LoginViewModelTest {
 
     lateinit var mainActivity: MainActivity
-    lateinit var userViewModel: UserViewModel
+    lateinit var loginViewModel: LoginViewModel
 
     @Before
     @Throws(Exception::class)
@@ -35,26 +34,26 @@ class UserViewModelTest {
                 .resume()
                 .get()
 
-        userViewModel = ViewModelProviders.of(mainActivity).get(UserViewModel::class.java)
+        loginViewModel = ViewModelProviders.of(mainActivity).get(LoginViewModel::class.java)
     }
 
     @Test
     fun testingIfEmailIdIsValid() {
         val mockedEmailId = "test@test.com"
-        assertTrue(userViewModel.validateEmail(mockedEmailId))
+        assertTrue(loginViewModel.validateEmail(mockedEmailId))
     }
 
     @Test
     fun testingIfEmailIdIsValidIfPatternMatchFails() {
         val mockedEmailId = "test-test.com"
-        assertTrue(!userViewModel.validateEmail(mockedEmailId))
+        assertTrue(!loginViewModel.validateEmail(mockedEmailId))
 
     }
 
     @Test
     fun testingIfEmailIdIsValidIfEmptyStringIsPassed() {
         val mockedEmailId = ""
-        assertTrue(!userViewModel.validateEmail(mockedEmailId))
+        assertTrue(!loginViewModel.validateEmail(mockedEmailId))
     }
 
     @After
